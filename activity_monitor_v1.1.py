@@ -3,7 +3,7 @@ import csv
 import datetime
 import os
 
-delay = 10
+delay = 16
 
 log_in = os.getlogin()
 
@@ -15,44 +15,6 @@ script_start_time = datetime.datetime.now()
 print(f'Start Script time {script_start_time}')
 
 total_time_list = []
-
-
-# def on_move(x, y):
-#     mouse_listener.start()
-#     mouse_listener.wait()
-#     print(f'Listening for mouse {mouse_listener.native_id}')
-#     start_time = datetime.datetime.now()
-#     track_time(start_time)
-#
-#
-# def on_click(x, y, button, pressed):
-#     mouse_listener.start()
-#     mouse_listener.wait()
-#     print(f'Listening for mouse {mouse_listener.native_id}')
-#     start_time = datetime.datetime.now()
-#     track_time(start_time)
-#     if not pressed:
-#         # Stop listener
-#         return False
-#
-#
-# def on_scroll(x, y, dx, dy):
-#     mouse_listener.start()
-#     mouse_listener.wait()
-#     print(f'Listening for mouse {mouse_listener.native_id}')
-#     start_time = datetime.datetime.now()
-#     track_time(start_time)
-#
-#
-# def on_press(key):
-#     start_time = datetime.datetime.now()
-#     keyboard_listener.start()
-#     keyboard_listener.wait()
-#     print(f'Listening for keyboard {keyboard_listener.native_id}')
-#     try:
-#         track_time(start_time)
-#     except AttributeError:
-#         track_time(start_time)
 
 def track_time(start_time):
     print(f'*****Start time**** {start_time}')
@@ -106,7 +68,6 @@ def report_csv():
             spamwriter.writeheader()
             spamwriter.writerow(report_info)
 
-
 def backup_folder():
     location = os.path.expandvars('{}/Time Report'.format(user_path))
     try:
@@ -114,7 +75,6 @@ def backup_folder():
     except:
         error = 'File already exists'
     return location
-
 
 today = datetime.date.today()
 report_info = {}
