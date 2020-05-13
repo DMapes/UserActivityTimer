@@ -4,7 +4,7 @@ import datetime
 import os
 import threading
 
-delay = 10
+delay = 15
 
 log_in = os.getlogin()
 
