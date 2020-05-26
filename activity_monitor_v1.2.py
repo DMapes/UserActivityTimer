@@ -4,7 +4,7 @@ import datetime
 import os
 import concurrent.futures
 
-delay = 16
+delay = 32
 
 log_in = os.getlogin()
 
@@ -16,7 +16,6 @@ script_start_time = datetime.datetime.now()
 print(f'Start Script time {script_start_time}')
 
 total_time_list = []
-
 
 def ms_track_time(start_time):
     print(f'*****Mouse Start time***** {start_time}')
@@ -38,8 +37,8 @@ def ms_track_time(start_time):
                 movement = False
             else:
                 event_time = datetime.datetime.now()
-                if ms_event:
-                    print(f'Received Mouse event {event_time}')
+                # if ms_event:
+                #     print(f'Received Mouse event {event_time}')
                 movement = True
                 continue
         time_elapsed = (end_time - start_time) - datetime.timedelta(seconds=delay)
@@ -67,8 +66,8 @@ def kb_track_time(start_time):
                 movement = False
             else:
                 event_time = datetime.datetime.now()
-                if kb_event:
-                    print(f'Received Keyboard event {event_time}')
+                # if kb_event:
+                #     print(f'Received Keyboard event {event_time}')
                 movement = True
                 continue
         time_elapsed = (end_time - start_time) - datetime.timedelta(seconds=delay)
@@ -89,16 +88,14 @@ def add_time(time_elapsed):
         report_info['Total'] = f'Total Time Today {str(added_time)}'
     # return added_time
 
-
 def report_csv():
     path = os.path.join(
-        '{}/{} Time-{}-TEST.csv'.format(new_backup_folder, log_in, f'{script_start_time:%Y.%m.%d %I.%M.%S %p}'))
+        '{}/{} Time-{}.csv'.format(new_backup_folder, log_in, f'{script_start_time:%Y.%m.%d %I.%M.%S %p}'))
     with open(path, 'w') as csvfile:
         if len(report_info) > 2:
             spamwriter = csv.DictWriter(csvfile, report_info.keys())
             spamwriter.writeheader()
             spamwriter.writerow(report_info)
-
 
 def backup_folder():
     location = os.path.expandvars('{}/Time Report'.format(user_path))
@@ -107,7 +104,6 @@ def backup_folder():
     except:
         error = 'File already exists'
     return location
-
 
 today = datetime.date.today()
 report_info = {}
